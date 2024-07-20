@@ -43,5 +43,7 @@
           extraEmacsPackages = epkgs:
             [ epkgs.treesit-grammars.with-all-grammars ];
         };
+
+        devShell = pkgs.mkShell { buildInputs = [ pkgs.jq ]; };
       });
 }

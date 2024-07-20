@@ -26,5 +26,6 @@ jobs:
 
       - name: Build and Push with Cachix
         run: |
+          nix develop
           set -e
-          nix build | cachix push larstvei
+          nix build --json | jq -r '.[].outputs | to_entries[].value' | cachix push larstvei
