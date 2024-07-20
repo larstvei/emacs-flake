@@ -1,0 +1,20 @@
+* Emacs Flake
+
+  This repository contains the Nix flake for my Emacs configuration. For the
+  full configuration, see https://github.com/larstvei/dot-emacs.
+
+** Usage
+
+   To run Emacs with my configuration, use the following command:
+
+   #+begin_src sh
+   nix run github:larstvei/emacs-flake
+   #+end_src
+
+** Updating
+
+   To update the flake, run:
+
+   #+begin_src sh
+   nix flake update
+   #+end_src
