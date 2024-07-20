@@ -40,8 +40,10 @@
           defaultInitFile = true;
           alwaysEnsure = true;
           alwaysTangle = true;
-          extraEmacsPackages = epkgs:
-            [ epkgs.treesit-grammars.with-all-grammars ];
+          extraEmacsPackages = epkgs: [
+            epkgs.treesit-grammars.with-all-grammars
+            epkgs.jinx
+          ];
         };
 
         devShell = pkgs.mkShell { buildInputs = [ pkgs.jq ]; };
