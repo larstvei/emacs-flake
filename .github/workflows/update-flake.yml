@@ -1,0 +1,30 @@
+name: Update Flake
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs every Sunday at midnight
+  workflow_dispatch:
+
+jobs:
+  update-flake:
+    runs-on: macos-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v27
+
+      - name: Update flake
+        run: nix flake update
+
+      - name: Commit and push if there are changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update flake" || exit 0
+          git push
