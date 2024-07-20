@@ -1,0 +1,30 @@
+name: Build and Cache with Cachix
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v27
+
+      - name: Authenticate with Cachix
+        uses: cachix/cachix-action@v15
+        with:
+          name: larstvei
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Build and Push with Cachix
+        run: |
+          set -e
+          nix build | cachix push larstvei
