@@ -1,6 +1,12 @@
 name: Build and Cache with Cachix
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '15 0 * * 0' # Runs every Sunday at 00:15
+  workflow_dispatch:
 
 jobs:
   build:
