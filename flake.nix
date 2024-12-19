@@ -27,7 +27,6 @@
         patched-emacs = (pkgs.emacs-git).overrideAttrs (o: {
           patches = [
             "${emacs-plus}/patches/emacs-31/fix-window-role.patch"
-            "${emacs-plus}/patches/emacs-31/poll.patch"
             "${emacs-plus}/patches/emacs-31/round-undecorated-frame.patch"
             "${emacs-plus}/patches/emacs-31/system-appearance.patch"
           ];
