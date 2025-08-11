@@ -16,13 +16,23 @@
   };
 
   outputs =
-    { self, nixpkgs, flake-utils, emacs-overlay, emacs-plus, emacs-config }:
-    flake-utils.lib.eachDefaultSystem (system:
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      emacs-overlay,
+      emacs-plus,
+      emacs-config,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays =
-            [ emacs-overlay.overlays.emacs emacs-overlay.overlays.package ];
+          overlays = [
+            emacs-overlay.overlays.emacs
+            emacs-overlay.overlays.package
+          ];
         };
         patched-emacs = (pkgs.emacs-git).overrideAttrs (o: {
           patches = [
@@ -32,7 +42,8 @@
           ];
         });
 
-      in {
+      in
+      {
         defaultPackage = pkgs.emacsWithPackagesFromUsePackage {
           config = "${emacs-config}/init.org";
           package = patched-emacs;
@@ -46,5 +57,6 @@
         };
 
         devShell = pkgs.mkShell { buildInputs = [ pkgs.jq ]; };
-      });
+      }
+    );
 }
