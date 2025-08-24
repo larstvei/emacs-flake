@@ -37,8 +37,8 @@
 
         emacsDarwin = (pkgs.emacs-unstable).overrideAttrs (_: {
           patches = [
-            "${emacs-plus}/patches/emacs-31/round-undecorated-frame.patch"
-            "${emacs-plus}/patches/emacs-31/system-appearance.patch"
+            "${emacs-plus}/patches/emacs-30/round-undecorated-frame.patch"
+            "${emacs-plus}/patches/emacs-30/system-appearance.patch"
           ];
         });
 
