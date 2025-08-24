@@ -34,18 +34,22 @@
             emacs-overlay.overlays.package
           ];
         };
-        patched-emacs = (pkgs.emacs-git).overrideAttrs (o: {
+
+        emacsDarwin = (pkgs.emacs-unstable).overrideAttrs (_: {
           patches = [
             "${emacs-plus}/patches/emacs-31/round-undecorated-frame.patch"
             "${emacs-plus}/patches/emacs-31/system-appearance.patch"
           ];
         });
 
+        emacsLinux = pkgs.emacs-unstable-pgtk;
+
+        emacsPkg = if pkgs.stdenv.isDarwin then emacsDarwin else emacsLinux;
       in
       {
         defaultPackage = pkgs.emacsWithPackagesFromUsePackage {
           config = "${emacs-config}/init.org";
-          package = patched-emacs;
+          package = emacsPkg;
           defaultInitFile = true;
           alwaysEnsure = true;
           alwaysTangle = true;
