@@ -56,6 +56,7 @@
           extraEmacsPackages = epkgs: [
             epkgs.treesit-grammars.with-all-grammars
             epkgs.jinx
+            epkgs.mu4e
           ];
         };
 
