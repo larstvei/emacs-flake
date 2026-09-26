@@ -42,9 +42,9 @@
           ];
         });
 
-        emacsLinux = pkgs.emacs-unstable-pgtk;
+        emacsLinux = pkgs.emacs-git-pgtk;
 
-        emacsPkg = if pkgs.stdenv.isDarwin then emacsDarwin else emacsLinux;
+        emacsPkg = if pkgs.stdenv.hostPlatform.isDarwin then emacsDarwin else emacsLinux;
       in
       {
         defaultPackage = pkgs.emacsWithPackagesFromUsePackage {
